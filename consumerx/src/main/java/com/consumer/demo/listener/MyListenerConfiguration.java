@@ -3,6 +3,7 @@ package com.consumer.demo.listener;
 
 import com.consumer.demo.config.MessageConfig;
 import com.consumer.demo.processor.Processor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aopalliance.aop.Advice;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -10,6 +11,7 @@ import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +30,9 @@ public class MyListenerConfiguration extends MessageConfig {
 
     @Value("${rabbit.queue.routing.key}")
     private String routingKey;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Bean
     public Binding queueBinding(){
@@ -67,7 +72,7 @@ public class MyListenerConfiguration extends MessageConfig {
 
     @Bean
     public Processor processor(){
-        return new Processor();
+        return new Processor(objectMapper);
     }
 
 }

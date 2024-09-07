@@ -113,8 +113,8 @@ public class MessageConfig {
 
     @Bean
     public MethodInterceptor statefulRetryOperationsInterceptor(){
-        return RetryInterceptorBuilder.stateful().backOffOptions(1000,1,1000)
-                .maxAttempts(3).recoverer(new RejectAndDontRequeueRecoverer())
+        return RetryInterceptorBuilder.stateful().backOffOptions(WAIT_ONE_SECOND,1,WAIT_ONE_SECOND)
+                .maxAttempts(RETRY_COUNT).recoverer(new RejectAndDontRequeueRecoverer())
                 .messageKeyGenerator(message -> {
                     if(StringUtils.isEmpty(message.getMessageProperties().getMessageId())){
                         return "invalid";

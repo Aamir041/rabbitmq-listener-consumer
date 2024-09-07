@@ -15,4 +15,5 @@ public class MetaData {
     private String messageId;
     private String routingKey;
     private String type;
+    private String messageVersionId;
 }

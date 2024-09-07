@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter
 @JsonPropertyOrder({"user", "messageMetadata"})
 public class UserEventDto extends MyMessage{
-    private User user;
+        private User user;
 }

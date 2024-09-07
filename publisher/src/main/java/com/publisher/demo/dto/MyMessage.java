@@ -7,6 +7,6 @@ import java.util.Map;
 
 @Getter
 @Setter
-public abstract class MyMessage {
+public abstract class MyMessage  {
     private Map<String, String> messageMetadata;
 }
