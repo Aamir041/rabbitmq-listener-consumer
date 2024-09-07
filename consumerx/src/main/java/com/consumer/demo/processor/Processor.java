@@ -1,10 +1,10 @@
 package com.consumer.demo.processor;
 
 import com.consumer.demo.dto.UserWrapperEvent;
-import com.consumer.demo.mapper.UserWrapperEventMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.publisher.demo.dto.UserEventDto;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashMap;
 
@@ -12,17 +12,22 @@ public class Processor {
 
     private ObjectMapper objectMapper;
 
+    private Logger LOG = LoggerFactory.getLogger(Processor.class);
+
     public Processor(ObjectMapper objectMapper){
         this.objectMapper = objectMapper;
     }
 
     public void processEvent(LinkedHashMap<String,Object> messageObj){
+        LOG.info("Processing Message....");
         UserWrapperEvent userWrapperEvent = objectMapper.convertValue(messageObj, UserWrapperEvent.class);
         processEvent(userWrapperEvent);
+        LOG.info("Message Processed....");
     }
 
 
     private void processEvent(UserWrapperEvent user){
-        System.out.println(user);
+        String userInfo = user.getUser().toString();
+        LOG.info("User from publisher :: {}",userInfo);
     }
 }

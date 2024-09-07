@@ -81,10 +81,10 @@ public class MessageConfig {
         return topicExchange;
     }
 
-    @Bean
-    public TopicExchange deadLetterExchange(){
-        return new TopicExchange(deadExchangeName,true,false);
-    }
+//    @Bean
+//    public TopicExchange deadLetterExchange(){
+//        return new TopicExchange(deadExchangeName,true,false);
+//    }
 
     @Bean
     public RabbitTransactionManager rabbitTransactionManager(){

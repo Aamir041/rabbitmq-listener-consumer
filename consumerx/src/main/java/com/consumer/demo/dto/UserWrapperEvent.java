@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serializable;
-
 @Getter
 @Setter
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserWrapperEvent implements Serializable {
+public class UserWrapperEvent {
     private User user;
     private MetaData messageMetadata;
 }

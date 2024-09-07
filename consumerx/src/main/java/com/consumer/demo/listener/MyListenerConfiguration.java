@@ -59,7 +59,7 @@ public class MyListenerConfiguration extends MessageConfig {
         container.setAmqpAdmin(rabbitAdmin());
         container.setMessageListener(messageListener());
         container.setAdviceChain(new Advice[]{statefulRetryOperationsInterceptor()});
-        container.setConcurrentConsumers(3);
+        container.setConcurrentConsumers(1);
         return container;
     }
 
