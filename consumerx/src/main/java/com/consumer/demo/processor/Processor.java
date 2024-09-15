@@ -27,7 +27,6 @@ public class Processor {
 
 
     private void processEvent(UserWrapperEvent user){
-        String userInfo = user.getUser().toString();
-        LOG.info("User from publisher :: {}",userInfo);
+        LOG.info("User from publisher :: {}", user);
     }
 }
