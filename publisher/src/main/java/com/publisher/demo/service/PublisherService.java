@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabb    it.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,7 @@ public class PublisherService {
 
     private void publish(String routingKey, Message message){
         try {
+            message.getMessageProperties().getHeaders().remove("__TypeId__");
             rabbitTemplate.send(routingKey,message);
         }
         catch (AmqpException amqpException){
@@ -40,8 +41,8 @@ public class PublisherService {
     private Message buildAmpqMessage(MyMessage message, String eventName, String routingKey, String version){
         MessageProperties messageProperties = createMessageProperties(eventName);
         message.setMessageMetadata(buildMessageHeader(eventName, routingKey, version, messageProperties));
-        LinkedHashMap<String, Object> mymessage =  convertObjectToLinkedHashMap(message);
-        return rabbitTemplate.getMessageConverter().toMessage(mymessage, messageProperties);
+//        LinkedHashMap<String, Object> mymessage =  convertObjectToLinkedHashMap(message);
+        return rabbitTemplate.getMessageConverter().toMessage(message, messageProperties);
 
     }
 
